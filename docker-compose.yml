@@ -11,6 +11,12 @@ services:
   jspring:
     container_name: jspring
     build: ./jspring
+    environment:
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_LOGS_EXPORTER=none
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
+      - OTEL_SERVICE_NAME=jspring
     ports:
       - 8081:8080
 
