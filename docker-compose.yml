@@ -8,6 +8,12 @@ services:
     ports:
       - 8080:80
 
+  jspring:
+    container_name: jspring
+    build: ./jspring
+    ports:
+      - 8081:8080
+
   otel-collector:
     container_name: otel
     image: otel/opentelemetry-collector:0.66.0
