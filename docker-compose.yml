@@ -1,0 +1,42 @@
+---
+version: "2"
+services:
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - 8080:80
+
+  otel-collector:
+    container_name: otel
+    image: otel/opentelemetry-collector:0.66.0
+    command: [ "--config=/etc/otel-collector.yml" ]
+    volumes:
+      - ./otel-collector.yml:/etc/otel-collector.yml:ro
+
+  tempo:
+    container_name: tempo
+    image: grafana/tempo:1.5.0
+    command: [ "-config.file=/etc/tempo.yml" ]
+    volumes:
+      - ./tempo.yml:/etc/tempo.yml:ro
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.40.3
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - 9090:9090
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:9.2.6
+    volumes:
+      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+      - tempo
