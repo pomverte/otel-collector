@@ -12,3 +12,8 @@
 - https://github.com/open-telemetry/opentelemetry-collector/blob/main/examples/local/otel-config.yaml
 - https://github.com/open-telemetry/opentelemetry-java/blob/main/sdk-extensions/autoconfigure/README.md
 - https://spring.io/blog/2022/10/12/observability-with-spring-boot-3
+
+## Renovate bot
+
+- https://github.com/renovatebot/tutorial
+- https://app.renovatebot.com/dashboard#github/pomverte/otel-collector
