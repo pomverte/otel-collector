@@ -2,7 +2,7 @@ FROM eclipse-temurin:17-alpine AS builder
 COPY . .
 RUN ./gradlew --no-daemon bootJar
 
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:17.0.5_8-jre-alpine
 EXPOSE 8080
 ARG OTEL_JAVA_AGENT_VERSION=1.20.2
 ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v${OTEL_JAVA_AGENT_VERSION}/opentelemetry-javaagent.jar /app/opentelemetry-javaagent.jar
