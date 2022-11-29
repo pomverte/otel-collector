@@ -2,6 +2,7 @@
 
 ## URLs
 - http://localhost:8080/
+- http://localhost:8080/api
 - http://localhost:3000/
 - http://localhost:9090/targets
 - http://localhost:8081/actuator/prometheus

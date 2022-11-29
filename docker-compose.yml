@@ -5,8 +5,12 @@ services:
   nginx:
     container_name: nginx
     build: ./nginx
+    volumes:
+      - ./nginx-default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - 8080:80
+    depends_on:
+      - jspring
 
   jspring:
     container_name: jspring
