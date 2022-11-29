@@ -17,8 +17,22 @@ services:
       - OTEL_LOGS_EXPORTER=none
       - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4317
       - OTEL_SERVICE_NAME=jspring
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/jspring
+      - SPRING_DATASOURCE_USERNAME=jspring
+      - SPRING_DATASOURCE_PASSWORD=am5ureevaoThu9egahNg
+      # - LOGGING_LEVEL_ROOT=DEBUG
     ports:
       - 8081:8080
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=jspring
+      - POSTGRES_USER=jspring
+      - POSTGRES_PASSWORD=am5ureevaoThu9egahNg
 
   otel-collector:
     container_name: otel
