@@ -4,6 +4,6 @@ CREATE TABLE bogops (
     prenom character varying(255) NOT NULL
 );
 INSERT INTO bogops (nom, prenom)
-VALUES ("Amelia", "Ward"),
-    ("Terra", "Carpenter"),
-    ("Frederick", "Flores");
+VALUES ('Amelia', 'Ward'),
+    ('Terra', 'Carpenter'),
+    ('Frederick', 'Flores');

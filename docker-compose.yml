@@ -20,6 +20,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/jspring
       - SPRING_DATASOURCE_USERNAME=jspring
       - SPRING_DATASOURCE_PASSWORD=am5ureevaoThu9egahNg
+      # - LOGGING_LEVEL_ROOT=DEBUG
     ports:
       - 8081:8080
     depends_on:
