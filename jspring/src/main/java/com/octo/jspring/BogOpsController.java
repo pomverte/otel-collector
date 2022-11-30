@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/v1/bogops")
 public class BogOpsController {
 
-    @GetMapping(value = "hello")
-    public String hello() {
+    @GetMapping(value = "salut")
+    public String salut() {
       return "tki";
     }
 
