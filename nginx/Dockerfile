@@ -1,8 +1,15 @@
-FROM nginx:1.18
-RUN apt-get update ; apt-get install unzip
-ADD https://github.com/open-telemetry/opentelemetry-cpp-contrib/releases/download/webserver%2Fv1.0.0/opentelemetry-webserver-sdk-x64-linux.tgz.zip /opt
-RUN cd /opt ; unzip opentelemetry-webserver-sdk-x64-linux.tgz.zip; tar xvfz opentelemetry-webserver-sdk-x64-linux.tgz
-RUN cd /opt/opentelemetry-webserver-sdk; ./install.sh
+FROM nginx:1.23.1
+ARG OPENTELEMETRY_WEBSERVER_VERSION=v1.0.2
+WORKDIR /opt
+ADD https://github.com/open-telemetry/opentelemetry-cpp-contrib/releases/download/webserver%2F${OPENTELEMETRY_WEBSERVER_VERSION}/opentelemetry-webserver-sdk-x64-linux.tgz.zip .
+RUN apt update \
+    && apt install -y unzip \
+    && unzip opentelemetry-webserver-sdk-x64-linux.tgz.zip \
+    && tar xvfz opentelemetry-webserver-sdk-x64-linux.tgz \
+    && cd ./opentelemetry-webserver-sdk \
+    && ./install.sh \
+    && apt remove -y unzip \
+    && rm -rf /var/lib/apt/lists/*
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/opentelemetry-webserver-sdk/sdk_lib/lib
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY opentelemetry_module.conf /etc/nginx/conf.d
