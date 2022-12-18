@@ -1,12 +1,29 @@
 package com.octo.jspring;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.io.Serializable;
 
+@Entity
+@Table(name = "bogops")
 public class BogOps implements Serializable {
 
+  @Id
+  @Column(nullable = false)
   private String id;
+
+  @Column(nullable = false)
   private String nom;
+
+  @Column(nullable = false)
   private String prenom;
+
+  public BogOps() {
+    super();
+  }
 
   public BogOps(String id, String nom, String prenom) {
     this.id = id;
