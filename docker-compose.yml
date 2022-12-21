@@ -7,13 +7,18 @@ services:
     image: traefik:v2.9
     command:
       - "--api.insecure=true"
+      - "--entryPoints.metrics.address=:8082"
       - "--entrypoints.web.address=:80"
       - "--log.level=INFO"
+      - "--metrics.prometheus=true"
+      - "--metrics.prometheus.addrouterslabels=true"
+      - "--metrics.prometheus.entryPoint=metrics"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker=true"
     ports:
       - 80:80
       - 8080:8080
+      - 8082:8082
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 

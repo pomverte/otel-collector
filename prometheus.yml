@@ -20,3 +20,7 @@ scrape_configs:
     metrics_path: /actuator/prometheus
     static_configs:
       - targets: ["jspring:8080"]
+
+  - job_name: traefik
+    static_configs:
+      - targets: ["traefik:8082"]
