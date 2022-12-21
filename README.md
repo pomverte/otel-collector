@@ -1,11 +1,15 @@
 # README
 
 ## URLs
-- http://localhost:8080/
-- http://localhost:8080/api
-- http://localhost:3000/
-- http://localhost:9090/targets
-- http://localhost:8081/actuator/prometheus
+- http://localhost:8080 (traefik dashboard)
+- http://prometheus.localhost
+- http://grafana.localhost
+- java spring boot service
+  - http://jspring.localhost/actuator/health
+  - http://jspring.localhost/actuator/prometheus
+  - http://jspring.localhost/actuator/flyway
+  - http://jspring.localhost/api/v1/salut
+  - http://jspring.localhost/api/v1/bogops
 
 ## References
 - https://opentelemetry.io/blog/2022/instrument-nginx/

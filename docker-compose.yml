@@ -2,15 +2,20 @@
 version: "2"
 services:
 
-  nginx:
-    container_name: nginx
-    build: ./nginx
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  traefik:
+    container_name: traefik
+    image: traefik:v2.9
+    command:
+      - "--api.insecure=true"
+      - "--entrypoints.web.address=:80"
+      - "--log.level=INFO"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker=true"
     ports:
-      - 8080:80
-    depends_on:
-      - jspring
+      - 80:80
+      - 8080:8080
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   jspring:
     container_name: jspring
@@ -25,8 +30,10 @@ services:
       - SPRING_DATASOURCE_USERNAME=jspring
       - SPRING_DATASOURCE_PASSWORD=am5ureevaoThu9egahNg
       # - LOGGING_LEVEL_ROOT=DEBUG
-    ports:
-      - 8081:8080
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jspring.rule=Host(`jspring.localhost`)
+      - traefik.http.routers.jspring.entrypoints=web
     depends_on:
       - postgres
 
@@ -57,8 +64,10 @@ services:
     image: prom/prometheus:v2.41.0
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    ports:
-      - 9090:9090
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)
+      - traefik.http.routers.prometheus.entrypoints=web
 
   grafana:
     container_name: grafana
@@ -69,8 +78,10 @@ services:
       - GF_AUTH_DISABLE_LOGIN_FORM=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_ANONYMOUS_ENABLED=true
-    ports:
-      - "3000:3000"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.grafana.rule=Host(`grafana.localhost`)
+      - traefik.http.routers.grafana.entrypoints=web
     depends_on:
       - prometheus
       - tempo
