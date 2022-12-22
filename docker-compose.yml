@@ -4,7 +4,7 @@ services:
 
   traefik:
     container_name: traefik
-    image: traefik:v3.0
+    image: traefik:v2.9
     command:
       - "--api.insecure=true"
       - "--entryPoints.metrics.address=:8082"
