@@ -4,7 +4,7 @@ services:
 
   traefik:
     container_name: traefik
-    image: traefik:v2.9
+    image: traefik:v2.9.6
     command:
       - "--api.insecure=true"
       - "--entryPoints.metrics.address=:8082"
@@ -15,6 +15,12 @@ services:
       - "--metrics.prometheus.entryPoint=metrics"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker=true"
+      # NOTE : le support du tracing avec otlp sera dans Traefik v3
+      # https://github.com/traefik/traefik/issues/6374#issuecomment-1329393583
+      # https://traefik.io/blog/traefik-proxy-3-0-scope-beta-program-and-the-first-feature-drop/#traefik-proxy-30-beta-1-and-the-first-feature-drop
+      # - "--tracing=true"
+      # - "--tracing.jaeger=true"
+      # - "--tracing.jaeger.samplingServerURL=http://localhost:5778/sampling"
     ports:
       - 80:80
       - 8080:8080
