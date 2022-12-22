@@ -78,7 +78,7 @@ services:
     container_name: grafana
     image: grafana/grafana:9.3.2
     volumes:
-      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml:ro
     environment:
       - GF_AUTH_DISABLE_LOGIN_FORM=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
