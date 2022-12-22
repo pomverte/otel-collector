@@ -29,6 +29,10 @@ receivers:
           static_configs:
             - targets: ["traefik:8082"]
 
+        - job_name: postgres-exporter
+          static_configs:
+            - targets: ["postgres-exporter:9187"]
+
 exporters:
   logging:
     loglevel: debug

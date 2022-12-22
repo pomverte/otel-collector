@@ -24,7 +24,6 @@ services:
     ports:
       - 80:80
       - 8080:8080
-      - 8082:8082
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
@@ -55,6 +54,13 @@ services:
       - POSTGRES_DB=jspring
       - POSTGRES_USER=jspring
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  postgres-exporter:
+    container_name: postgres-exporter
+    image: prometheuscommunity/postgres-exporter:v0.11.1
+    environment:
+      - DATA_SOURCE_NAME="postgresql://jspring:${POSTGRES_PASSWORD}@postgres:5432/jspring?sslmode=disable"
+    depends_on:
+      - postgres
 
   otel-collector:
     container_name: otel
