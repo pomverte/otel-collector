@@ -2,8 +2,7 @@
 
 ## URLs
 - Traefik
-  - http://localhost:8080 (traefik dashboard)
-  - http://localhost:8082/metrics
+  - http://localhost:8080
 - http://prometheus.localhost
 - http://grafana.localhost
 - java spring boot service
