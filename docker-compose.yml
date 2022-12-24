@@ -6,6 +6,7 @@ services:
     container_name: traefik
     image: traefik:v2.9.6
     command:
+      - "--accesslog=true"
       - "--api.insecure=true"
       - "--entryPoints.metrics.address=:8082"
       - "--entrypoints.web.address=:80"
