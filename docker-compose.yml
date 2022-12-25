@@ -10,6 +10,7 @@ services:
       - "--api.insecure=true"
       - "--entryPoints.metrics.address=:8082"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
       - "--log.level=INFO"
       - "--metrics.prometheus=true"
       - "--metrics.prometheus.addrouterslabels=true"
@@ -43,8 +44,8 @@ services:
       # - LOGGING_LEVEL_ROOT=DEBUG
     labels:
       - traefik.enable=true
-      - traefik.http.routers.jspring.rule=Host(`jspring.localhost`)
       - traefik.http.routers.jspring.entrypoints=web
+      - traefik.http.routers.jspring.rule=Host(`jspring.localhost`)
     depends_on:
       - postgres
 
@@ -84,8 +85,8 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     labels:
       - traefik.enable=true
-      - traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)
       - traefik.http.routers.prometheus.entrypoints=web
+      - traefik.http.routers.prometheus.rule=Host(`prometheus.localhost`)
 
   grafana:
     container_name: grafana
@@ -98,8 +99,8 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
     labels:
       - traefik.enable=true
-      - traefik.http.routers.grafana.rule=Host(`grafana.localhost`)
       - traefik.http.routers.grafana.entrypoints=web
+      - traefik.http.routers.grafana.rule=Host(`grafana.localhost`)
     depends_on:
       - prometheus
       - tempo
