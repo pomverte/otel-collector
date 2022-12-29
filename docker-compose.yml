@@ -70,6 +70,10 @@ services:
     command: [ "--config=/etc/otel-collector.yml" ]
     volumes:
       - ./otel-collector.yml:/etc/otel-collector.yml:ro
+    depends_on:
+      - tempo
+      - postgres-exporter
+      - prometheus
 
   tempo:
     container_name: tempo
