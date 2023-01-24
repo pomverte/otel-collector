@@ -11,6 +11,7 @@ services:
       - "--entryPoints.metrics.address=:8082"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      - "--global.sendAnonymousUsage"
       - "--log.level=INFO"
       - "--metrics.prometheus=true"
       - "--metrics.prometheus.addrouterslabels=true"
