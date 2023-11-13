@@ -59,7 +59,7 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
   postgres-exporter:
     container_name: postgres-exporter
-    image: prometheuscommunity/postgres-exporter:v0.12.0
+    image: prometheuscommunity/postgres-exporter:v0.15.0
     environment:
       DATA_SOURCE_NAME: "postgresql://jspring:${POSTGRES_PASSWORD}@postgres:5432/jspring?sslmode=disable"
     depends_on:
