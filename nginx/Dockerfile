@@ -1,4 +1,4 @@
-FROM nginx:1.24.0
+FROM nginx:1.27.1
 ARG OPENTELEMETRY_WEBSERVER_VERSION=v1.0.3
 WORKDIR /opt
 ADD https://github.com/open-telemetry/opentelemetry-cpp-contrib/releases/download/webserver%2F${OPENTELEMETRY_WEBSERVER_VERSION}/opentelemetry-webserver-sdk-x64-linux.tgz .
